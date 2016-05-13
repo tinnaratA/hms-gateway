@@ -1,0 +1,120 @@
+{% extends 'client/base.html' %}
+
+
+
+
+{% block content %}
+
+
+<script>
+
+if({{ error }} == 1){
+  alert("password is wrong");
+}
+
+</script>
+
+
+<script>
+function hide(getvalue){
+  var oauthx = document.getElementById("oauthblock");
+  var oauth2x = document.getElementById("oauthblock2");
+  var ldapx = document.getElementById("ldapblock");
+  var nativex = document.getElementById("nativeblock");
+	if(getvalue=="oauth"){
+		  oauthx.style.display = 'block';
+      oauth2x.style.display = 'inline';
+      ldapx.style.display = 'none';
+      nativex.style.display = 'none';
+	}
+  else if(getvalue=="ldap"){
+		  oauthx.style.display = 'none';
+      oauth2x.style.display = 'none';
+      ldapx.style.display = 'block';
+      nativex.style.display = 'none';
+	}
+  else{
+      oauthx.style.display = 'none';
+      oauth2x.style.display = 'none';
+      ldapx.style.display = 'none';
+      nativex.style.display = 'block';
+  }
+};
+</script>
+
+
+
+<form role="form" method="POST" action="{{ views.oauthLogin }}">
+
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="text">Username:</label>
+    <input type="tetxt" class="form-control" id="username" name="username" value="admin">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" id="password" name="password" value="admin@1234">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Login Type:</label>
+    <select class="form-control" onchange="hide(this.value)" id="type" name="type">
+      <option value="oauth">OAuth</option>
+      <option value="ldap">OpenLDAP</option>
+      <option value="native">Native</option>
+    </select>
+  </div>
+
+<div id="oauthblock">
+  <div class="form-group">
+    <label for="text">Client ID:</label>
+    <input type="tetxt" class="form-control" id="username" name="clientID" value="YBwnuoa49VQcbxfQypXOe3QScJgOUiBf5yblTUpP">
+  </div>
+  <div class="form-group">
+    <label for="text">Client Secret:</label>
+    <input width="100%" type="tetxt" class="form-control" id="username" name="clientSecret" value="1i3uUxoxNmRYTQKCmlFFeh0pFhcxUglzFZ0qBFTVlEnXyQIOl47RIJG4nPFu53Z5OKnFhnzVXmrJbbmnw5JEGulBOpRiN45UiLscxznsRNbv85Qife19rKhXovPJJ8bE">
+  </div>
+  <div class="form-group">
+    <label for="text">Tokens:</label>
+    <input type="tetxt" class="form-control" id="username" name="token" value="{{ token }}">
+  </div>
+</div>
+
+<div id="ldapblock">
+  <div class="form-group">
+    <label for="pwd">Server:</label>
+    <input type="text" class="form-control" id="server" name="server" value="localhost">
+  </div>
+</div>
+
+<div id="nativeblock">
+  <div class="form-group">
+    <label for="pwd">BU:</label>
+    <select class="form-control">
+      <option value="bhq">BHQ</option>
+      <option value="BNH">BNH</option>
+    </select>
+  </div>
+</div>
+
+
+
+  <button type="submit" class="btn btn-default" id="oauthblock2">Get Token</button>
+
+
+  <button type="submit" name="submission" value="submit" class="btn btn-default">Submit</button>
+</form>
+
+
+<script>
+
+  var oauthx = document.getElementById("oauthblock");
+  var ldapx = document.getElementById("ldapblock");
+  var nativex = document.getElementById("nativeblock");
+
+		  oauthx.style.display = 'block';
+      ldapx.style.display = 'none';
+      nativex.style.display = 'none';
+
+</script>
+
+{% endblock %}
