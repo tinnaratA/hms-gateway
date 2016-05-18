@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
 	'hmsapp',
     'Client',
-    'dataprovider',
+    'securityservice',
+	'webquery',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -57,14 +58,12 @@ MIDDLEWARE_CLASSES = [
 ]
 
 OAUTH2_PROVIDER = {
-    # this is the list of available scopes
     'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
 }
 
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-#      'rest_framework.permissions.IsAuthenticated',
       'oauth2_provider.ext.rest_framework.OAuth2Authentication',
     ),
 	
@@ -93,37 +92,23 @@ TEMPLATES = [
 WSGI_APPLICATION = 'hmsgw.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 #DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'cqionline',
-#         'USER': 'cqidbuser',
-#         'PASSWORD': 'p@ssw0rdCQI',
-#         'HOST': '172.18.62.121',
-#         'PORT': '5432',
-#     }
-#}
-
-#DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'hmsdb',
-#         'USER': 'hmsdbuser',
-#         'PASSWORD': 'rklg;biNf',
-#         'HOST': '172.18.62.121',
-#         'PORT': '5432',
+#    'default': {
+#       'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #    }
 #}
+
+DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql',
+         'NAME': 'hmsdb',
+         'USER': 'hmsdbuser',
+         'PASSWORD': 'rklg;biNf',
+         'HOST': '172.18.62.121',
+         'PORT': '5432',
+    }
+}
 
 
 

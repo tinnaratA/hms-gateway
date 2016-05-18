@@ -8,7 +8,7 @@ from django.contrib import admin
 
 admin.autodiscover()
 
-from dataprovider.models import ssuser,ctloc
+from securityservice.models import ssuser,ctloc
 
 from rest_framework import permissions, routers, serializers, viewsets, generics
 from rest_framework import filters
@@ -18,15 +18,15 @@ from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasS
 
 from Client import views as client_view
 
-from dataprovider import views as dataprovider_view
+from securityservice import views as dataprovider_view
 
 
 
 
 # Routers provide an easy way of automatically determining the URL conf
 router = routers.DefaultRouter()
-router.register(r'ssuser', dataprovider_view.SsuserViewSet,'ssuser')
-router.register(r'ctloc', dataprovider_view.CtlocViewSet,'ctloc')
+router.register(r'securityservice', dataprovider_view.SecurityServiceViewSet,'securityservice')
+#router.register(r'ctloc', dataprovider_view.CtlocViewSet,'ctloc')
 
 
 
@@ -40,8 +40,12 @@ urlpatterns = patterns('',
 
 	# Users login
 	url(r'^Client/', client_view.oauthLogin, name='oauthLogin'),
+
+	#Web Quey
+	url(r'^', include('webquery.urls')),
 )
 
 if settings.DEBUG:
 	urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
